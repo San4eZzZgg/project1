@@ -1,0 +1,19 @@
+/*селектор 
+    свойство, значение
+
+div{
+    color: rgb(255, 0, 0);
+}
+.test{
+    color: rgb(0, 0, 255)
+}
+#text{
+    color: rgb(255, 251, 0)
+}
+*/
+h1{
+    color:rebeccapurple
+}
+a{
+    color:red  
+}
