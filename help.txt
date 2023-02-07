@@ -1,0 +1,7 @@
+git config --global --unset user.name
+git config --global --unset user.email
+выход
+
+git config --global user.name "San4eZzZgg"
+git config --global user.email terekhovmega@gmail.com
+
