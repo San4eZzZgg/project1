@@ -85,4 +85,11 @@ h1{
     position: absolute;
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: 0 0 10px #16D9E3;
+}
+.hide{
+    opacity: 0;
+}
+.primary{
+    color: #16D9E3;
 }
