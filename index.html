@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Blinking slider</title>
+</head>
+
+<body>
+   
+    <div class="container">
+        <div class="slider">
+            <img class = 'active' src="https://images.unsplash.com/photo-1520052205864-92d242b3a76b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1535013113415-b315146c67d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1534214526114-0ea4d47b04f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+        </div>
+
+        <nav class="slider-nav">
+            <ul>
+                <li class="arrow">
+                    <button class="previous">
+                        <span>  <i class="fa-solid fa-arrow-left"></i>  </span>
+                    </button>
+                </li>
+                <li class="arrow">
+                    <button class="next">
+                        <span>  <i class="fa-solid fa-arrow-right"></i> </span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
