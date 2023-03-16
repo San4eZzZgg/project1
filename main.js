@@ -1,5 +1,7 @@
 const board = document.querySelector('.board')
 const body = document.querySelector('body')
+const scoreView = document.querySelector('.scores')
+const stepBackBtn = document.querySelector('.step-back')
 
 let data = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 const colors = {
@@ -8,9 +10,23 @@ const colors = {
     1024: '#A2231D', 2048: '#75151E'
 }
 
+let score = 0
+let prevScore = 0
+let prevPosition = []
+let STEP_BACK_LIMIT = 5
+let stepBackCounter = 0
+
+stepBackBtn.addEventListener('click', () => {
+    data = [...prevPosition]
+    prevPosition = []
+    score = prevScore
+    reDrawField()
+})
+
 body.addEventListener('keydown', (event) => {
     moveController(event.key)
 })
+
 
 function moveController(key) {
     switch (key) {
@@ -30,18 +46,23 @@ function moveController(key) {
 }
 
 function startGame() {
+    score = 0
+    addNumber()
+    addNumber()
     reDrawField()
 }
 
-startGame()
+
 
 function moveFunc(direction, dir, axis) {
+    prevScore = score
+    prevPosition = [...data]
     axis === 'y' && (data = transpose(data))
     clearZeroesAndFills(dir)
     direction()
     clearZeroesAndFills(dir)
     direction()
-axis === 'y' && (data = transpose(data))
+    axis === 'y' && (data = transpose(data))
     addNumber()
     reDrawField()
 }
@@ -52,6 +73,7 @@ function left() {
             if (row[i] === row[i + 1]) {
                 row[i] = row[i] * 2
                 row[i + 1] = 0
+                score += row[i] * 2
             }
         }
     })
@@ -62,6 +84,7 @@ function right() {
             if (row[i] === row[i - 1]) {
                 row[i] = row[i] * 2
                 row[i - 1] = 0
+                score += row[i] * 2
             }
         }
     })
@@ -91,13 +114,16 @@ function reDrawField() {
         square.innerHTML = num ? num : ''
         board.append(square)
     }
+    scoreView.innerHTML = score
 }
+
+startGame()
 
 function getRandomNumber(min, max) {
     return Math.floor(min + Math.random() * (max + 1 - min))
 }
 
-function checkGameIsOver(){
+function checkGameIsOver() {
     let arr = []
     data.forEach(row => row.forEach(el => {
         arr.push(el)
@@ -127,10 +153,12 @@ function transpose(array) {
         (prev[i] || []).concat(next[i])
     ), [])
 }
-function gameOver(){
+
+function gameOver() {
     body.innerHTML = `
-    <div>
-    <h1 class = 'game-over'>GAME OVER</h1>
+    <div class="over-title">
+        <h1 class="game-over">GAME OVER</h1>
+        <div class="score">${score}</div>
     </div>
     `
 }
