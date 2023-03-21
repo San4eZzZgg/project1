@@ -2,25 +2,37 @@ const board = document.querySelector('.board')
 const body = document.querySelector('body')
 const scoreView = document.querySelector('.scores')
 const stepBackBtn = document.querySelector('.step-back')
+const newGame = document.querySelector('.start-game')
 
 let data = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 const colors = {
-    0: 'lightgrey', 2: '#84FBAC', 4: '#C7B446', 8: '#BEBD7F', 16: '#2E3A23',
-    32: '#CBD0CC', 64: '#7E7B52', 128: ' #474B4E', 256: '#8F8F8', 512: '#354D73',
-    1024: '#A2231D', 2048: '#75151E'
+    0: '#bcb0ff', 2: '#bb91ff', 4: '#7045ff', 8: '#8c00ff', 16: '#9f04c9',
+    32: '#c900d4', 64: '#ed00f5', 128: '#f500f5', 256: '#f500e0', 512: '#354D73',
+    1024: '#ff00cc', 2048: '#ff0077'
 }
 
 let score = 0
 let prevScore = 0
 let prevPosition = []
-let STEP_BACK_LIMIT = 5
-let stepBackCounter = 0
+const STEP_BACK_LIMIT = 5
+let step_counter = 0
+
+newGame.addEventListener('click', () => {
+    startGame()
+})
 
 stepBackBtn.addEventListener('click', () => {
-    data = [...prevPosition]
-    prevPosition = []
-    score = prevScore
-    reDrawField()
+    if (!prevPosition.length) {
+        alert('Действие невозможно')
+    } else if (STEP_BACK_LIMIT > step_counter) {
+        data = [...prevPosition]
+        prevPosition = []
+        score = prevScore
+        reDrawField()
+        alert(`Осталось ${STEP_BACK_LIMIT - ++step_counter}`)
+    } else {
+        alert('Лимит превышен')
+    }
 })
 
 body.addEventListener('keydown', (event) => {
@@ -46,13 +58,13 @@ function moveController(key) {
 }
 
 function startGame() {
+    data = data.map(row => row.map(item => 0))
+    prevPosition = []
     score = 0
     addNumber()
     addNumber()
     reDrawField()
 }
-
-
 
 function moveFunc(direction, dir, axis) {
     prevScore = score
@@ -155,10 +167,20 @@ function transpose(array) {
 }
 
 function gameOver() {
-    body.innerHTML = `
+    const modal = document.createElement('div')
+    const inner = document.createElement('div')
+    modal.classList.add('modal')
+    inner.classList.add('modal__inner')
+    inner.innerHTML = `
     <div class="over-title">
         <h1 class="game-over">GAME OVER</h1>
         <div class="score">${score}</div>
     </div>
     `
+    modal.addEventListener('click',()=>{
+        modal.classList.add('hide')
+    })
+    modal.append(inner)
+    body.append(modal)
+
 }

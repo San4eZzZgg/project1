@@ -64,6 +64,7 @@ body {
     font-size: 50px;
     color: blueviolet;
 }
+
 .btn{
     width: 120px;
     height: 48px;
@@ -75,7 +76,50 @@ body {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.restart-btn{
+    width: 120px;
+    height: 48px;
+    background-color: darkorchid;
+    border: none;
+    border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .step-back{
     top: 30px;
     left: 50px;
+}
+
+.start-game{
+    background-color: darkorchid;
+    top: 30px;
+    left: 200px;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__inner {
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    opacity: 1;
+    border-radius: 15px;
+}
+.hide{
+    display: none;
 }

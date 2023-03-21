@@ -3,3 +3,44 @@
 https://learngitbranching.js.org/?locale=ru_RU
 
 17.01.23
+
+    0: '#bcb0ff', 2: '#bb91ff', 4: '#7045ff', 8: '#8c00ff', 16: '#9f04c9',
+    32: '#c900d4', 64: '#ed00f5', 128: '#f500f5', 256: '#f500e0', 512: '#354D73',
+    1024: '#ff00cc', 2048: '#ff0077'
+
+    .over-title{
+    color: blueviolet;
+    padding: 50px;
+    border-radius: 15px;
+    background-color: #FFF;
+}
+
+.scores{
+    position: absolute;
+    top: 150px;
+    font-size: 50px;
+    color: blueviolet;
+}
+
+.btn{
+    width: 120px;
+    height: 48px;
+    background-color: darkorchid;
+    border: none;
+    border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.restart-btn{
+    width: 120px;
+    height: 48px;
+    background-color: darkorchid;
+    border: none;
+    border-radius: 15px;
+    position: absolute;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
