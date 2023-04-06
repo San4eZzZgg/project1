@@ -1,52 +1,39 @@
-const square = document.querySelector('.player')
+const square = document.querySelector('.square')
 const body = document.querySelector('body')
+const board = document.querySelector('#board')
+const STEP = 10
+
 let moves = []
 
-body.addEventListener('keydown', moveController)
-
-function moveController(e) {
-    switch (e.key) {
-        case 'w':
-            moveFn(e.key)
-            break
-        case 's':
-            moveFn(e.key)
-            break
-        case 'a':
-            moveFn(e.key)
-            break
-        case 'd':
-            moveFn(e.key)
-            break
-    }
-}
-function moveFn(dir) {
-    const x = parseInt(window.getComputedStyle(square).right) 
-    const y = parseInt(window.getComputedStyle(square).top) 
-    dir === 'a' && (square.style.right = x + 50 + 'px')
-    dir === 'd' && (square.style.right = x - 50 + 'px')
-    dir === 'w' && (square.style.top = y - 50 + 'px')
-    dir === 's' && (square.style.top = y + 50 + 'px')
-}
-body.addEventListener('keydown', (e)=> {
-    if (!moves.includes(e.key)){
+body.addEventListener('keydown', (e) => {
+    if (!moves.includes(e.key)) {
         moves.push(e.key)
-
     }
 })
-body.addEventListener('keyup', (e)=>{
+
+body.addEventListener('keyup', (e) => {
     moves = moves.filter(el => el !== e.key)
 })
 
-function movementController(){
-    delay(()=>{
-        moves.includes('w') && move('шаг вверх')
-        moves.includes('s') && move('вшаг вниз')
-        moves.includes('a') && move('шаг влево')
-        moves.includes('d') && move('шаг вправо')
-    })
+function movementController() {
+    delay(() => moves.forEach(d => ['w', 's', 'a', 'd'].includes(d) && move(d)))
 }
-moveController()
+
+movementController()
+
+function move(dir) {
+    const { width: board_W, height: board_H } = board.getBoundingClientRect()
+    const { width: square_W, height: square_H } = square.getBoundingClientRect()
+    const TOP = parseInt(window.getComputedStyle(square).top)
+    const RIGHT = parseInt(window.getComputedStyle(square).right)
+    dir === 'w' && TOP > 0 && (square.style.top = TOP - STEP + 'px')
+    dir === 'd' && RIGHT > 0 && (square.style.right = RIGHT - STEP + 'px')
+    dir === 'a' && (square.style.right = RIGHT + STEP + 'px')
+    dir === 's' &&(square.style.top = TOP + STEP + 'px')
+    /*
+        Добавить движения 'a', 's', 'd'
+    */
+}
 
 function delay(callback) {
     setInterval(callback, 30)
