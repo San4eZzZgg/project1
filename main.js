@@ -1,4 +1,5 @@
 const square = document.querySelector('.square')
+const square2 = document.querySelector('.square2')
 const body = document.querySelector('body')
 const board = document.querySelector('#board')
 const STEP = 10
@@ -16,7 +17,7 @@ body.addEventListener('keyup', (e) => {
 })
 
 function movementController() {
-    delay(() => moves.forEach(d => ['w', 's', 'a', 'd'].includes(d) && move(d)))
+    delay(() => moves.forEach(d => ['w', 's', 'a', 'd', 'i', 'k', 'j', 'l'].includes(d) && move(d)))
 }
 
 movementController()
@@ -24,12 +25,24 @@ movementController()
 function move(dir) {
     const { width: board_W, height: board_H } = board.getBoundingClientRect()
     const { width: square_W, height: square_H } = square.getBoundingClientRect()
+    const { width: square2_W, height: square2_H } = square2.getBoundingClientRect()
     const TOP = parseInt(window.getComputedStyle(square).top)
     const RIGHT = parseInt(window.getComputedStyle(square).right)
+    const LEFT = parseInt(window.getComputedStyle(square).left)
+    const BOTTOM = parseInt(window.getComputedStyle(square).bottom)
     dir === 'w' && TOP > 0 && (square.style.top = TOP - STEP + 'px')
     dir === 'd' && RIGHT > 0 && (square.style.right = RIGHT - STEP + 'px')
-    dir === 'a' && (square.style.right = RIGHT + STEP + 'px')
-    dir === 's' &&(square.style.top = TOP + STEP + 'px')
+    dir === 'a' && LEFT > 0 && (square.style.right = RIGHT + STEP + 'px')
+    dir === 's' && BOTTOM < 0 && (square.style.top = TOP + STEP + 'px')
+
+    const TOP2 = parseInt(window.getComputedStyle(square2).top)
+    const RIGHT2 = parseInt(window.getComputedStyle(square2).right)
+    const LEFT2 = parseInt(window.getComputedStyle(square2).left)
+    const BOTTOM2 = parseInt(window.getComputedStyle(square2).bottom)
+    dir === 'i' && TOP2 > 0 && (square2.style.top = TOP2 - STEP + 'px')
+    dir === 'l' && RIGHT2 > 0 && (square2.style.right = RIGHT2 - STEP + 'px')
+    dir === 'j' && LEFT2 > 0 && (square2.style.right = RIGHT2 + STEP + 'px')
+    dir === 'k' && BOTTOM2 < 0 && (square2.style.top = TOP2 + STEP + 'px')
     /*
         Добавить движения 'a', 's', 'd'
     */
