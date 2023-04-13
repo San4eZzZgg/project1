@@ -1,53 +1,78 @@
-const square = document.querySelector('.square')
-const square2 = document.querySelector('.square2')
-const body = document.querySelector('body')
+const screens = document.querySelectorAll('.screen')
+const form = document.querySelector('form')
 const board = document.querySelector('#board')
-const STEP = 10
 
-let moves = []
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    screens[0].classList.add('up')
+    const { sizeA, sizeB } = getSizes()
+    const Blue = new Square(sizeA, 'blue', board).init()
+    const Red = new Square(sizeB, 'red', board).init()
+})
 
-body.addEventListener('keydown', (e) => {
-    if (!moves.includes(e.key)) {
-        moves.push(e.key)
+
+function getSizes() {
+    const sizeA = getValidValue(+document.querySelector('.a').value)
+    const sizeB = getValidValue(+document.querySelector('.b').value)
+
+    function getValidValue(value) {
+        if (!value) return 80
+        if (value < 50 || value > 300) {
+            return 80
+        }
+        return value
     }
-})
-
-body.addEventListener('keyup', (e) => {
-    moves = moves.filter(el => el !== e.key)
-})
-
-function movementController() {
-    delay(() => moves.forEach(d => ['w', 's', 'a', 'd', 'i', 'k', 'j', 'l'].includes(d) && move(d)))
+    return { sizeA, sizeB }
 }
 
-movementController()
 
-function move(dir) {
-    const { width: board_W, height: board_H } = board.getBoundingClientRect()
-    const { width: square_W, height: square_H } = square.getBoundingClientRect()
-    const { width: square2_W, height: square2_H } = square2.getBoundingClientRect()
-    const TOP = parseInt(window.getComputedStyle(square).top)
-    const RIGHT = parseInt(window.getComputedStyle(square).right)
-    const LEFT = parseInt(window.getComputedStyle(square).left)
-    const BOTTOM = parseInt(window.getComputedStyle(square).bottom)
-    dir === 'w' && TOP > 0 && (square.style.top = TOP - STEP + 'px')
-    dir === 'd' && RIGHT > 0 && (square.style.right = RIGHT - STEP + 'px')
-    dir === 'a' && LEFT > 0 && (square.style.right = RIGHT + STEP + 'px')
-    dir === 's' && BOTTOM < 0 && (square.style.top = TOP + STEP + 'px')
 
-    const TOP2 = parseInt(window.getComputedStyle(square2).top)
-    const RIGHT2 = parseInt(window.getComputedStyle(square2).right)
-    const LEFT2 = parseInt(window.getComputedStyle(square2).left)
-    const BOTTOM2 = parseInt(window.getComputedStyle(square2).bottom)
-    dir === 'i' && TOP2 > 0 && (square2.style.top = TOP2 - STEP + 'px')
-    dir === 'l' && RIGHT2 > 0 && (square2.style.right = RIGHT2 - STEP + 'px')
-    dir === 'j' && LEFT2 > 0 && (square2.style.right = RIGHT2 + STEP + 'px')
-    dir === 'k' && BOTTOM2 < 0 && (square2.style.top = TOP2 + STEP + 'px')
-    /*
-        Добавить движения 'a', 's', 'd'
-    */
-}
 
-function delay(callback) {
-    setInterval(callback, 30)
-}
+
+// const square = document.querySelector('.square')
+// const body = document.querySelector('body')
+// const board = document.querySelector('#board')
+// const STEP = 10
+// const form = document.querySelector('form')
+
+// form.addEventListener('submit',(e)=>{
+//     e.preventDefault()
+//     const sizeBlue = document.querySelector('.a').value
+//     const sizeRed = document.querySelector('.b').value
+
+//     console.log('Форма отправлена', sizeBlue, sizeRed)
+// })
+
+// let moves = []
+
+// body.addEventListener('keydown', (e) => {
+//     if (!moves.includes(e.key)) {
+//         moves.push(e.key)
+//     }
+// })
+
+// body.addEventListener('keyup', (e) => {
+//     moves = moves.filter(el => el !== e.key)
+// })
+
+// function movementController() {
+//     delay(() => moves.forEach(d => ['w', 's', 'a', 'd'].includes(d) && move(d)))
+// }
+
+// movementController()
+
+// function move(dir) {
+//     const { width: board_W, height: board_H } = board.getBoundingClientRect()
+//     const { width: square_W, height: square_H } = square.getBoundingClientRect()
+//     const TOP = parseInt(window.getComputedStyle(square).top)
+//     const RIGHT = parseInt(window.getComputedStyle(square).right)
+//     dir === 'w' && TOP > 0 && (square.style.top = TOP - STEP + 'px')
+//     dir === 'd' && RIGHT > 0 && (square.style.right = RIGHT - STEP + 'px')
+//     dir === 'a' && board_W > RIGHT + square_W && (square.style.right = RIGHT + STEP + 'px')
+//     dir === 's' && board_H > TOP + square_H && (square.style.top = TOP + STEP + 'px')
+//     console.log(board_W, RIGHT, square_W)
+// }
+
+// function delay(callback) {
+//     setInterval(callback, 30)
+// }

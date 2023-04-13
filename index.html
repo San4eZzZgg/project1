@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,31 @@
     <link rel="stylesheet" href="./style.css">
     <title>Move</title>
 </head>
+
 <body>
-    
-    <div class="menu">
-        <h1 class="title">ПОН</h1>
-        <div class="1p"><input type="text">размер первого игрока сюда</div>
-        <div class="2p"><input type="text">размер второго игрока сюда</div>
-        <button class="start">START BATTLE</button>
-    </div>
-    <div class="board" id="board">
-        <div class="square"></div>
-        <div class="square2"></div>
+
+    <div class="screen">
+        <form>
+            <div>
+                <div>Размер 1-го:</div>
+                <input class="a" type="text">
+            </div>
+            <br>
+            <div>
+                <div>Размер 2-го:</div>
+                <input class="b" type="text">
+            </div>
+            <br>
+            <button type="submit">Начать</button>
+        </form>
     </div>
 
+    <div class="screen">
+        <div class="board" id="board"></div>
+    </div>
+
+    <script src="./Suqare.js"></script>
     <script src="./main.js"></script>
 </body>
+
 </html>
